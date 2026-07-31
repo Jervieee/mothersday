@@ -1,0 +1,295 @@
+/* Heart bounce and sparkles for SweetAlert2 */
+.heart-bounce {
+    position: relative;
+    width: 90px;
+    height: 90px;
+    margin: 0 auto 8px auto;
+    animation: bounce-in 0.7s cubic-bezier(.68,-0.55,.27,1.55);
+}
+/* Improved Heart Shape and Effects */
+.heart-anim {
+    position: relative;
+    width: 80px;
+    height: 72px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: heart-beat 1s infinite, heart-float 2.5s ease-in-out infinite;
+    z-index: 2;
+}
+.heart-anim .heart-shape {
+    position: absolute;
+    top: 16px;
+    left: 20px;
+    width: 40px;
+    height: 40px;
+    background: #e75480;
+    transform: rotate(-45deg);
+    border-radius: 50% 50% 0 0;
+    box-shadow: 0 2px 16px #e7548040, 0 0 24px 8px #e7548080;
+}
+.heart-anim .heart-shape::before,
+.heart-anim .heart-shape::after {
+    content: "";
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background: #e75480;
+    border-radius: 50%;
+}
+.heart-anim .heart-shape::before {
+    top: -20px;
+    left: 0;
+}
+.heart-anim .heart-shape::after {
+    left: 20px;
+    top: 0;
+}
+@keyframes heart-beat {
+    0%, 100% { transform: scale(1); }
+    10% { transform: scale(1.1); }
+    20% { transform: scale(1); }
+    30% { transform: scale(1.2); }
+    50% { transform: scale(1); }
+}
+@keyframes heart-float {
+    0%, 100% { filter: drop-shadow(0 0 0 #e7548040); transform: translateY(0); }
+    50% { filter: drop-shadow(0 8px 24px #e7548040); transform: translateY(-12px) scale(1.04); }
+}
+@keyframes heart-beat {
+    0%, 100% { transform: scale(1); }
+    10% { transform: scale(1.1); }
+    20% { transform: scale(1); }
+    30% { transform: scale(1.2); }
+    50% { transform: scale(1); }
+}
+@keyframes bounce-in {
+    0% { transform: scale(0.2); opacity: 0; }
+    60% { transform: scale(1.2); opacity: 1; }
+    80% { transform: scale(0.95); }
+    100% { transform: scale(1); }
+}
+.sparkle {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    background: radial-gradient(circle, #fff6fa 60%, #e75480 100%);
+    border-radius: 50%;
+    opacity: 0.8;
+    z-index: 1;
+    pointer-events: none;
+    animation: sparkle-pop 1.2s infinite;
+}
+.sparkle1 {
+    left: 10px;
+    top: 10px;
+    animation-delay: 0s;
+}
+.sparkle2 {
+    left: 60px;
+    top: 8px;
+    animation-delay: 0.4s;
+}
+.sparkle3 {
+    left: 35px;
+    top: 60px;
+    animation-delay: 0.7s;
+}
+@keyframes sparkle-pop {
+    0% { transform: scale(0.5); opacity: 0.7; }
+    50% { transform: scale(1.2); opacity: 1; }
+    100% { transform: scale(0.5); opacity: 0.7; }
+}
+/* Animated Heart for SweetAlert2 */
+.heart-anim {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 16px auto;
+    position: relative;
+    animation: heart-beat 1s infinite;
+}
+.heart-anim::before,
+.heart-anim::after {
+    content: "";
+    position: absolute;
+    left: 40px;
+    top: 0;
+    width: 40px;
+    height: 64px;
+    background: #e75480;
+    border-radius: 40px 40px 0 0;
+    transform: rotate(-45deg);
+    box-shadow: 0 2px 16px #e7548040;
+}
+.heart-anim::after {
+    left: 0;
+    transform: rotate(45deg);
+}
+@keyframes heart-beat {
+    0%, 100% { transform: scale(1); }
+    10% { transform: scale(1.1); }
+    20% { transform: scale(1); }
+    30% { transform: scale(1.2); }
+    50% { transform: scale(1); }
+}
+
+body {
+    background: linear-gradient(120deg, #ffe0ec 0%, #f8e1ff 50%, #e0f7fa 100%);
+    min-height: 100vh;
+    margin: 0;
+    font-family: 'Poppins', Arial, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+/* Animated floating hearts background */
+.bg-hearts {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    pointer-events: none;
+    z-index: 0;
+}
+.bg-heart {
+    position: absolute;
+    width: 48px;
+    height: 44px;
+    background: #f06292;
+    left: 10vw;
+    top: 80vh;
+    opacity: 0.18;
+    transform: rotate(-45deg);
+    animation: float-heart 12s linear infinite;
+}
+.bg-heart::before,
+.bg-heart::after {
+    content: "";
+    position: absolute;
+    width: 48px;
+    height: 44px;
+    background: #f06292;
+    border-radius: 50%;
+}
+.bg-heart::before {
+    top: -24px;
+    left: 0;
+}
+.bg-heart::after {
+    left: 24px;
+    top: 0;
+}
+.heart1 {
+    left: 10vw;
+    animation-delay: 0s;
+    animation-duration: 13s;
+}
+.heart2 {
+    left: 30vw;
+    top: 90vh;
+    background: #e75480;
+    opacity: 0.13;
+    animation-delay: 2s;
+    animation-duration: 15s;
+}
+.heart3 {
+    left: 60vw;
+    top: 85vh;
+    background: #f8bbd0;
+    opacity: 0.15;
+    animation-delay: 4s;
+    animation-duration: 11s;
+}
+.heart4 {
+    left: 80vw;
+    top: 95vh;
+    background: #f06292;
+    opacity: 0.10;
+    animation-delay: 1s;
+    animation-duration: 17s;
+}
+.heart5 {
+    left: 50vw;
+    top: 100vh;
+    background: #e75480;
+    opacity: 0.12;
+    animation-delay: 3s;
+    animation-duration: 14s;
+}
+@keyframes float-heart {
+    0% {
+        transform: translateY(0) scale(1) rotate(-45deg);
+        opacity: 0.18;
+    }
+    70% {
+        opacity: 0.22;
+        transform: translateY(-60vh) scale(1.15) rotate(-45deg);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-100vh) scale(1.2) rotate(-45deg);
+    }
+}
+
+.container {
+    background: #fff8fa;
+    padding: 40px 32px 32px 32px;
+    border-radius: 24px;
+    box-shadow: 0 4px 24px #f0629233;
+    text-align: center;
+    max-width: 400px;
+}
+
+h1 {
+    color: #e75480;
+    font-family: 'Dancing Script', cursive;
+    font-size: 2.5rem;
+    margin-bottom: 0.5em;
+}
+
+.subtitle {
+    color: #333;
+    font-size: 1.2rem;
+    margin-bottom: 2em;
+}
+
+.buttons {
+    display: flex;
+    gap: 18px;
+    justify-content: center;
+}
+
+.main-btn {
+    background: linear-gradient(90deg, #e75480 60%, #f06292 100%);
+    color: #fff;
+    border: none;
+    border-radius: 24px;
+    padding: 14px 28px;
+    font-size: 1.1rem;
+    font-family: inherit;
+    cursor: pointer;
+    box-shadow: 0 2px 8px #e7548033;
+    transition: background 0.3s, transform 0.2s;
+    position: relative;
+    z-index: 1;
+}
+
+.main-btn:hover {
+    background: linear-gradient(90deg, #f06292 60%, #e75480 100%);
+
+/* SweetAlert2 custom styles */
+.swal2-rounded {
+    border-radius: 32px !important;
+    box-shadow: 0 8px 32px rgba(215, 38, 96, 0.10) !important;
+}
+.swal2-btn-custom {
+    border-radius: 24px !important;
+    font-size: 1.1rem !important;
+    padding: 12px 32px !important;
+    background: linear-gradient(90deg, #f06292 0%, #e75480 100%) !important;
+    color: #fff !important;
+    box-shadow: 0 2px 8px rgba(215, 38, 96, 0.10) !important;
+}
+    transform: scale(1.06);
+}
