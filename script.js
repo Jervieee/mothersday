@@ -1,87 +1,202 @@
-const fineBtn = document.getElementById('fineBtn');
-const notGoodBtn = document.getElementById('notGoodBtn');
+const puzzles = {
+    characters: [
+        { word: 'MOSES', jumble: 'SOSEM', clue: 'He led the Israelites out of Egypt.' },
+        { word: 'DAVID', jumble: 'VAIDD', clue: 'He defeated Goliath with a sling and a stone.' },
+        { word: 'JONAH', jumble: 'HANOJ', clue: 'He was swallowed by a great fish.' },
+        { word: 'ESTHER', jumble: 'HETRES', clue: 'She became queen and saved her people.' },
+        { word: 'RUTH', jumble: 'HURT', clue: 'She stayed loyal to Naomi.' },
+        { word: 'ELIJAH', jumble: 'JHLAEI', clue: 'He was a prophet taken up to heaven in a whirlwind.' },
+        { word: 'DANIEL', jumble: 'LNAIDE', clue: "He was thrown into the lions' den." },
+        { word: 'JOHN', jumble: 'HNAOJ', clue: 'He baptized Jesus.' },
+        { word: 'PAUL', jumble: 'LPAU', clue: 'He wrote many letters in the New Testament.' },
+        { word: 'JOSEPH', jumble: 'SHEPJO', clue: 'His brothers sold him, but he became a leader in Egypt.' }
+    ],
+    books: [
+        { word: 'GENESIS', jumble: 'SISENGE', clue: 'The first book of the Bible; it tells about Creation.' },
+        { word: 'EXODUS', jumble: 'SOXUDE', clue: 'This book tells how the Israelites left Egypt.' },
+        { word: 'MATTHEW', jumble: 'TTHMAWE', clue: 'The first book of the New Testament.' },
+        { word: 'MARK', jumble: 'KRAM', clue: 'The shortest Gospel.' },
+        { word: 'LUKE', jumble: 'KEUL', clue: 'This Gospel was written by a doctor.' },
+        { word: 'JOHN', jumble: 'HNOJ', clue: 'This Gospel says, "For God so loved the world..."' },
+        { word: 'ACTS', jumble: 'STCA', clue: 'This book tells about the beginning of the early church.' },
+        { word: 'PSALMS', jumble: 'SMLASP', clue: 'A book filled with songs, prayers, and praises.' },
+        { word: 'PROVERBS', jumble: 'SVERPBRO', clue: 'A book full of wisdom, mostly connected to Solomon.' },
+        { word: 'ROMANS', jumble: 'SMARNO', clue: 'This book teaches about salvation through faith in Jesus.' }
+    ]
+};
 
-// Not So Good button movement
-let moving = false;
-let moveInterval = null;
-let stopTries = 0;
+const state = {
+    category: 'characters',
+    index: 0,
+    solved: new Set(),
+    score: 0,
+    streak: 0,
+    hintUsed: false,
+    randomMode: false,
+    timeLeft: 10,
+    timerId: null,
+    advanceId: null,
+    currentItems: []
+};
 
-notGoodBtn.addEventListener('mouseenter', function () {
-    if (stopTries < 3) {
-        moving = true;
-        moveButton();
-    }
-});
+const el = {
+    score: document.getElementById('score'),
+    solved: document.getElementById('solved'),
+    total: document.getElementById('total'),
+    streak: document.getElementById('streak'),
+    categoryLabel: document.getElementById('categoryLabel'),
+    progressLabel: document.getElementById('progressLabel'),
+    timer: document.getElementById('timer'),
+    timerBadge: document.querySelector('.question-timer'),
+    jumbleLabel: document.getElementById('jumbleLabel'),
+    jumbleWord: document.getElementById('jumbleWord'),
+    hintBtn: document.getElementById('hintBtn'),
+    skipBtn: document.getElementById('skipBtn'),
+    nextBtn: document.getElementById('nextBtn'),
+    randomBtn: document.getElementById('randomBtn'),
+    message: document.getElementById('message'),
+    answerReveal: document.getElementById('answerReveal'),
+    modeBtns: document.querySelectorAll('.mode-btn[data-category]')
+};
 
-notGoodBtn.addEventListener('mouseleave', function () {
-    moving = false;
-    clearInterval(moveInterval);
-    notGoodBtn.style.position = '';
-    notGoodBtn.style.left = '';
-    notGoodBtn.style.top = '';
-});
-
-notGoodBtn.addEventListener('click', function () {
-    if (stopTries < 3) {
-        stopTries++;
-        if (stopTries >= 3) {
-            moving = false;
-            clearInterval(moveInterval);
-            notGoodBtn.style.position = '';
-            notGoodBtn.style.left = '';
-            notGoodBtn.style.top = '';
-        }
-    }
-    Swal.fire({
-        title: 'Sending Love',
-        html: "<b>If you feel Not so Good today, Mom...</b><br><br>I'm here to remind you that you are my everything. You make me proud by being so strong for us. Thank you for being our great soldier, for providing everything, and for your endless love. Even if I'm far away, I'm always your little 'ate'.<br><br><span style='color:#e75480;font-weight:bold;'>I love you Mama and I miss you so much! 💖</span>",
-        icon: 'info',
-        confirmButtonText: 'I love you too!',
-        background: '#fff0f6',
-        color: '#d72660',
-        confirmButtonColor: '#e75480',
-        customClass: {
-            popup: 'swal2-rounded',
-            confirmButton: 'swal2-btn-custom'
-        }
-    });
-});
-
-function moveButton() {
-    notGoodBtn.style.position = 'relative';
-    moveInterval = setInterval(() => {
-        if (!moving) return;
-        const x = Math.random() * 120 - 60;
-        const y = Math.random() * 60 - 30;
-        notGoodBtn.style.left = `${x}px`;
-        notGoodBtn.style.top = `${y}px`;
-    }, 180);
+function shuffle(array) {
+    return [...array].sort(() => Math.random() - 0.5);
 }
 
-fineBtn.addEventListener('click', function () {
-    Swal.fire({
-        title: 'Happy Mothers Day!',
-        html: `
-            <div class='heart-bounce'>
-                <div class='heart-anim'><div class='heart-shape'></div></div>
-                <div class='sparkle sparkle1'></div>
-                <div class='sparkle sparkle2'></div>
-                <div class='sparkle sparkle3'></div>
-            </div>
-            <div style='margin-top:8px;'>
-                <b>I love you mama</b>, thank you for being My Great Soldier, My Inspiration and My Everything.<br>
-                Happy Mothers Day to my great Mom.<br>
-                <span style='color:#e75480;font-weight:bold;'>I LOVE YOU WITH MY ALL HEART. 💖</span>
-            </div>
-        `,
-        showConfirmButton: true,
-        confirmButtonText: 'I love you too!',
-        background: '#fff0f6',
-        color: '#d72660',
-        confirmButtonColor: '#e75480',
-        customClass: {
-            popup: 'swal2-rounded',
-            confirmButton: 'swal2-btn-custom'
+function setItems() {
+    if (state.randomMode || state.category === 'identification') {
+        state.currentItems = shuffle([...puzzles.characters, ...puzzles.books].map((item, i) => ({
+            ...item,
+            id: `${item.word}-${i}`
+        })));
+    } else {
+        state.currentItems = puzzles[state.category].map((item, i) => ({
+            ...item,
+            id: `${state.category}-${i}`
+        }));
+    }
+    state.index = 0;
+    state.solved = new Set();
+    state.score = 0;
+    state.streak = 0;
+    state.hintUsed = false;
+    el.total.textContent = state.currentItems.length;
+}
+
+function currentItem() {
+    return state.currentItems[state.index];
+}
+
+function updateStats() {
+    el.score.textContent = state.score;
+    el.solved.textContent = state.solved.size;
+    el.streak.textContent = state.streak;
+}
+
+function updateModeButtons() {
+    el.modeBtns.forEach((btn) => {
+        btn.classList.toggle('active', btn.dataset.category === state.category && !state.randomMode);
+    });
+}
+
+function showCurrentPuzzle() {
+    const item = currentItem();
+    if (!item) return;
+
+    el.jumbleLabel.textContent = 'Question';
+    el.jumbleWord.textContent = item.clue;
+    el.jumbleWord.classList.add('question-display');
+    el.categoryLabel.textContent = state.randomMode ? 'Random Mix' : (state.category === 'identification' ? 'Identification' : (state.category === 'characters' ? 'Bible Characters' : 'Books of the Bible'));
+    el.progressLabel.textContent = `${state.index + 1} of ${state.currentItems.length}`;
+    el.answerReveal.textContent = '';
+    updateStats();
+    startTimer();
+}
+
+function startTimer() {
+    clearInterval(state.timerId);
+    clearTimeout(state.advanceId);
+    state.timeLeft = 10;
+    el.timer.textContent = state.timeLeft;
+    el.timerBadge.classList.remove('warning');
+    state.timerId = setInterval(() => {
+        state.timeLeft -= 1;
+        el.timer.textContent = state.timeLeft;
+        el.timerBadge.classList.toggle('warning', state.timeLeft <= 3);
+
+        if (state.timeLeft <= 0) {
+            clearInterval(state.timerId);
+            state.streak = 0;
+            showMessage("Time's up! Click Reveal Answer to see the answer.", 'error');
+            updateStats();
         }
+    }, 1000);
+}
+
+function showMessage(text, type = '') {
+    el.message.textContent = text;
+    el.message.className = `message ${type}`.trim();
+}
+
+function advance(nextIndex) {
+    clearTimeout(state.advanceId);
+    state.index = nextIndex;
+    state.hintUsed = false;
+    if (state.index >= state.currentItems.length) {
+        state.index = 0;
+        showMessage('Great job! You finished the set. Starting over for another round.', 'success');
+    }
+    showCurrentPuzzle();
+}
+
+function handleCorrect() {
+    const item = currentItem();
+    state.solved.add(item.id);
+    clearInterval(state.timerId);
+    state.score += state.hintUsed ? 0 : 10;
+    state.streak += 1;
+    showMessage(`Correct! ${item.word} is right.`, 'success');
+    el.answerReveal.textContent = `Answer: ${item.word}`;
+    updateStats();
+}
+
+function resetRound(category, random = false) {
+    state.category = category;
+    state.randomMode = random;
+    setItems();
+    updateModeButtons();
+    showCurrentPuzzle();
+    showMessage('New round loaded. Read the question and reveal the answer when ready.');
+}
+
+el.hintBtn.addEventListener('click', () => {
+    const item = currentItem();
+    state.hintUsed = true;
+    el.answerReveal.textContent = `Answer: ${item.word}`;
+    showMessage('');
+});
+
+el.skipBtn.addEventListener('click', () => {
+    state.streak = 0;
+    showMessage('Skipped this one. Moving on.');
+    advance(state.index + 1);
+});
+
+el.nextBtn.addEventListener('click', () => {
+    advance(state.index + 1);
+});
+
+el.randomBtn.addEventListener('click', () => {
+    resetRound('characters', true);
+});
+
+el.modeBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+        resetRound(btn.dataset.category, false);
     });
 });
+
+setItems();
+updateModeButtons();
+showCurrentPuzzle();
+updateStats();

@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday, Chelsea</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-a: #2d1e12;
+            --bg-b: #7d4f24;
+            --card: rgba(255, 248, 236, 0.9);
+            --card-strong: #fff4df;
+            --text: #2c1d12;
+            --muted: #6c5846;
+            --gold: #f5b63f;
+            --gold-2: #ffd772;
+            --green: #4a8f49;
+            --pink: #f06aa7;
+            --shadow: 0 22px 70px rgba(23, 14, 9, 0.35);
+            --radius: 28px;
+        }
+
+        * { box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: "Inter", Arial, sans-serif;
+            color: var(--text);
+            background:
+                radial-gradient(circle at top left, rgba(255, 214, 102, 0.26), transparent 24%),
+                radial-gradient(circle at top right, rgba(255, 135, 183, 0.15), transparent 24%),
+                linear-gradient(160deg, var(--bg-a), var(--bg-b));
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background-image:
+                radial-gradient(rgba(255,255,255,0.14) 1px, transparent 1px);
+            background-size: 34px 34px;
+            pointer-events: none;
+            opacity: 0.25;
+        }
+
+        .glow {
+            position: fixed;
+            width: 360px;
+            height: 360px;
+            border-radius: 50%;
+            filter: blur(20px);
+            pointer-events: none;
+        }
+
+        .glow.a { left: -100px; top: -90px; background: rgba(255, 222, 130, 0.22); }
+        .glow.b { right: -120px; bottom: 4%; background: rgba(255, 123, 184, 0.14); }
+
+        .shell {
+            position: relative;
+            z-index: 1;
+            width: min(1120px, calc(100% - 24px));
+            margin: 0 auto;
+            padding: 22px 0 54px;
+        }
+
+        .hero,
+        .panel,
+        .letter-modal {
+            background: var(--card);
+            border: 1px solid rgba(255,255,255,0.46);
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(12px);
+        }
+
+        .hero {
+            border-radius: 34px;
+            padding: 30px;
+            color: #fff8ef;
+            background:
+                linear-gradient(135deg, rgba(35, 20, 10, 0.92), rgba(88, 54, 21, 0.9)),
+                radial-gradient(circle at top right, rgba(255, 214, 102, 0.18), transparent 30%);
+        }
+
+        .eyebrow {
+            margin: 0 0 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.24em;
+            color: #ffd86e;
+            font-weight: 800;
+            font-size: 0.78rem;
+        }
+
+        h1, h2, h3 {
+            margin: 0;
+            font-family: "DM Serif Display", Georgia, serif;
+            font-weight: 400;
+        }
+
+        h1 {
+            font-size: clamp(2.6rem, 7vw, 5.2rem);
+            line-height: 0.95;
+            max-width: 9ch;
+        }
+
+        .lead {
+            max-width: 60ch;
+            margin: 16px 0 0;
+            color: rgba(255, 248, 241, 0.84);
+            line-height: 1.8;
+            font-size: 1rem;
+        }
+
+        .question-card {
+            margin-top: 18px;
+            border-radius: 30px;
+            padding: 26px;
+            background: linear-gradient(180deg, rgba(255, 250, 240, 0.98), rgba(255, 242, 221, 0.96));
+        }
+
+        .question {
+            display: grid;
+            gap: 18px;
+            justify-items: center;
+            text-align: center;
+        }
+
+        .question p {
+            margin: 0;
+            font-size: clamp(1.3rem, 3vw, 2rem);
+            font-weight: 800;
+            color: #3b2a1a;
+        }
+
+        .button-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 14px;
+            position: relative;
+            min-height: 84px;
+        }
+
+        button {
+            border: none;
+            font: inherit;
+            border-radius: 999px;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, left 0.35s ease, top 0.35s ease;
+        }
+
+        .yes-btn {
+            position: relative;
+            background: linear-gradient(135deg, var(--gold-2), var(--gold));
+            color: #4b2d08;
+            font-weight: 900;
+            padding: 18px 30px;
+            box-shadow: 0 16px 26px rgba(245, 182, 63, 0.28);
+            transform: scale(1);
+            z-index: 2;
+        }
+
+        .no-btn {
+            position: relative;
+            background: rgba(54, 37, 21, 0.08);
+            color: #4d3726;
+            padding: 16px 24px;
+            font-weight: 800;
+            border: 1px solid rgba(77, 55, 38, 0.12);
+        }
+
+        .spaced {
+            transform: translateX(28px) rotate(-5deg);
+        }
+
+        .run-away {
+            position: absolute;
+            left: auto;
+            top: auto;
+            right: 6%;
+            bottom: -2px;
+            transform: translateY(8px) rotate(8deg);
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .celebration {
+            margin-top: 18px;
+            display: none;
+            gap: 18px;
+        }
+
+        .celebration.show {
+            display: grid;
+        }
+
+        .big-title {
+            font-size: clamp(2.8rem, 8vw, 5.8rem);
+            text-align: center;
+            color: #fff7d8;
+            text-shadow: 0 8px 20px rgba(56, 31, 7, 0.45);
+        }
+
+        .sunflower-row {
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+            flex-wrap: wrap;
+            font-size: clamp(2rem, 5vw, 3.6rem);
+            filter: drop-shadow(0 10px 16px rgba(0,0,0,0.18));
+        }
+
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .music-btn,
+        .letter-btn {
+            padding: 14px 20px;
+            background: rgba(255,255,255,0.14);
+            border: 1px solid rgba(255,255,255,0.18);
+            color: #fff;
+            font-weight: 800;
+        }
+
+        .music-btn:hover,
+        .letter-btn:hover,
+        .yes-btn:hover,
+        .no-btn:hover {
+            transform: translateY(-2px) scale(1.02);
+        }
+
+        .music-btn {
+            background: linear-gradient(135deg, rgba(74, 143, 73, 0.85), rgba(44, 110, 55, 0.9));
+            box-shadow: 0 14px 24px rgba(20, 65, 28, 0.25);
+        }
+
+        .letter-btn {
+            background: linear-gradient(135deg, rgba(240, 106, 167, 0.92), rgba(185, 63, 119, 0.95));
+            box-shadow: 0 14px 24px rgba(145, 42, 89, 0.22);
+        }
+
+        .intro-note {
+            text-align: center;
+            color: var(--muted);
+            font-size: 0.95rem;
+            margin: 6px 0 0;
+        }
+
+        .section {
+            margin-top: 28px;
+            border-radius: 30px;
+            padding: 24px;
+            background: linear-gradient(180deg, rgba(255, 249, 240, 0.98), rgba(255, 244, 228, 0.97));
+        }
+
+        .section h2 {
+            font-size: clamp(2rem, 5vw, 3.4rem);
+            text-align: center;
+            color: #5a3614;
+        }
+
+        .section p {
+            text-align: center;
+            color: #5a4636;
+            max-width: 62ch;
+            margin: 14px auto 0;
+            line-height: 1.75;
+        }
+
+        .carousel {
+            margin-top: 18px;
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 14px;
+        }
+
+        .slide {
+            min-height: 250px;
+            border-radius: 24px;
+            padding: 16px;
+            display: flex;
+            align-items: end;
+            color: #fff7eb;
+            background-size: cover;
+            background-position: center;
+            box-shadow: inset 0 -90px 80px rgba(0,0,0,0.35), 0 14px 28px rgba(44, 22, 7, 0.18);
+        }
+
+        .slide span {
+            display: inline-block;
+            background: rgba(24, 14, 6, 0.42);
+            padding: 10px 12px;
+            border-radius: 16px;
+            font-weight: 700;
+            line-height: 1.4;
+            backdrop-filter: blur(4px);
+        }
+
+        .s1 { background-image: linear-gradient(rgba(255, 193, 89, 0.12), rgba(0,0,0,0.1)), url('https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=900&q=85'); }
+        .s2 { background-image: linear-gradient(rgba(255, 193, 89, 0.12), rgba(0,0,0,0.1)), url('https://images.unsplash.com/photo-1513159446162-54eb8bdaa79b?auto=format&fit=crop&w=900&q=85'); }
+        .s3 { background-image: linear-gradient(rgba(255, 193, 89, 0.12), rgba(0,0,0,0.1)), url('https://images.unsplash.com/photo-1504198453319-5ce911bafcde?auto=format&fit=crop&w=900&q=85'); }
+
+        .letter-modal {
+            position: fixed;
+            inset: 0;
+            display: none;
+            place-items: center;
+            padding: 18px;
+            background: rgba(17, 9, 4, 0.55);
+            z-index: 20;
+        }
+
+        .letter-modal.show { display: grid; }
+
+        .letter-card {
+            width: min(720px, 100%);
+            border-radius: 32px;
+            padding: 26px;
+            background: linear-gradient(180deg, rgba(255, 251, 243, 0.99), rgba(255, 242, 221, 0.99));
+            box-shadow: 0 28px 90px rgba(0,0,0,0.32);
+        }
+
+        .letter-card h3 {
+            font-size: clamp(2rem, 5vw, 3.2rem);
+            color: #7a4520;
+            text-align: center;
+        }
+
+        .letter-card p {
+            color: #4f4134;
+            line-height: 1.85;
+            font-size: 1.03rem;
+            margin: 16px 0 0;
+        }
+
+        .close-btn {
+            margin-top: 18px;
+            width: 100%;
+            padding: 14px 18px;
+            background: #2c1d12;
+            color: #fff;
+            font-weight: 800;
+        }
+
+        .sparkle {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 2;
+        }
+
+        .sparkle i {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #fff 0 28%, #ffd95b 29% 62%, rgba(255,217,91,0) 63%);
+            animation: float-up 5s linear infinite;
+            opacity: 0.7;
+        }
+
+        @keyframes float-up {
+            from { transform: translateY(110vh) scale(0.7); opacity: 0; }
+            15% { opacity: 0.9; }
+            to { transform: translateY(-14vh) scale(1.2); opacity: 0; }
+        }
+
+        @media (max-width: 840px) {
+            .carousel { grid-template-columns: 1fr; }
+            .question-card, .section, .hero { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="glow a"></div>
+    <div class="glow b"></div>
+    <div class="sparkle" aria-hidden="true" id="sparkles"></div>
+
+    <main class="shell">
+        <section class="hero">
+            <p class="eyebrow">A little birthday surprise</p>
+            <h1>Happy Birthday, Chelsea</h1>
+            <p class="lead">
+                Start by answering the question below. If the &ldquo;No&rdquo; button is pressed again and again,
+                the &ldquo;Yes&rdquo; button grows bigger, and after the third &ldquo;No&rdquo; the button starts running away.
+                When she finally says yes, the birthday celebration, sunflower reveal, and music appear.
+            </p>
+        </section>
+
+        <section class="question-card" id="decisionCard">
+            <div class="question">
+                <p id="questionText">Are you happy today?</p>
+                <div class="button-row" id="buttonRow">
+                    <button class="yes-btn" id="yesBtn" type="button">Yes</button>
+                    <button class="no-btn" id="noBtn" type="button">No</button>
+                </div>
+                <p class="intro-note" id="hintText">Try pressing No a few times and watch what happens.</p>
+            </div>
+        </section>
+
+        <section class="celebration" id="celebration">
+            <div class="section">
+                <h2 class="big-title">Happy Birthday</h2>
+                <div class="sunflower-row" aria-hidden="true">&#x1F33B; &#x1F33B; &#x1F33B; &#x1F33B; &#x1F33B;</div>
+                <p>
+                    To the most special friend in my life, this little page was made just for you.
+                    Scroll down for the memory carousel and open the letter when you want a sweet message.
+                </p>
+                <div class="controls">
+                    <button class="music-btn" id="musicBtn" type="button">Play Birthday Song</button>
+                    <button class="letter-btn" id="letterBtn" type="button">Open Letter</button>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>To the most special friend in my life</h2>
+                <p>
+                    A small carousel of warm memories and happy colors, made to celebrate you.
+                </p>
+                <div class="carousel">
+                    <div class="slide s1"><span>Joy that shines like sunshine.</span></div>
+                    <div class="slide s2"><span>Laughs, hugs, and sweet birthday wishes.</span></div>
+                    <div class="slide s3"><span>Memories that keep blooming like sunflowers.</span></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div class="letter-modal" id="letterModal" aria-hidden="true">
+        <div class="letter-card" role="dialog" aria-modal="true" aria-labelledby="letterTitle">
+            <h3 id="letterTitle">A Letter For You</h3>
+            <p>
+                Dear Chelsea,<br><br>
+                You are one of the brightest gifts in my life. I hope this birthday brings you peace,
+                laughter, good memories, and all the little things that make your heart smile.
+                Thank you for being special, kind, and unforgettable. May this year be full of growth,
+                answered prayers, and beautiful surprises.<br><br>
+                Happy birthday, always.
+            </p>
+            <button class="close-btn" id="closeLetterBtn" type="button">Close Letter</button>
+        </div>
+    </div>
+
+    <script>
+        const yesBtn = document.getElementById('yesBtn');
+        const noBtn = document.getElementById('noBtn');
+        const buttonRow = document.getElementById('buttonRow');
+        const celebration = document.getElementById('celebration');
+        const decisionCard = document.getElementById('decisionCard');
+        const musicBtn = document.getElementById('musicBtn');
+        const letterBtn = document.getElementById('letterBtn');
+        const letterModal = document.getElementById('letterModal');
+        const closeLetterBtn = document.getElementById('closeLetterBtn');
+        const sparkles = document.getElementById('sparkles');
+
+        let noCount = 0;
+        let yesScale = 1;
+        let runaway = false;
+        let audioCtx = null;
+        let musicTimer = null;
+
+        function growYes() {
+            yesScale = Math.min(yesScale + 0.18, 2.8);
+            yesBtn.style.transform = `scale(${yesScale})`;
+            yesBtn.style.boxShadow = `0 ${16 + yesScale * 3}px ${26 + yesScale * 5}px rgba(245, 182, 63, 0.32)`;
+        }
+
+        function moveNoButton() {
+            runaway = true;
+            const rowRect = buttonRow.getBoundingClientRect();
+            const maxX = Math.max(20, rowRect.width - 140);
+            const maxY = Math.max(12, rowRect.height - 56);
+            const x = Math.floor(Math.random() * maxX);
+            const y = Math.floor(Math.random() * maxY);
+            noBtn.classList.add('run-away');
+            noBtn.style.left = `${x}px`;
+            noBtn.style.top = `${y}px`;
+            noBtn.style.right = 'auto';
+            noBtn.style.bottom = 'auto';
+        }
+
+        function createSparkles() {
+            const colors = ['#fff4bf', '#ffe0a4', '#ffcc6e', '#ffd9ef'];
+            for (let i = 0; i < 18; i++) {
+                const star = document.createElement('i');
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.animationDelay = `${Math.random() * 5}s`;
+                star.style.animationDuration = `${4 + Math.random() * 4}s`;
+                star.style.transform = `scale(${0.6 + Math.random() * 1.4})`;
+                star.style.background = `radial-gradient(circle, #fff 0 28%, ${colors[i % colors.length]} 29% 62%, rgba(255,255,255,0) 63%)`;
+                sparkles.appendChild(star);
+            }
+        }
+
+        function noteFrequency(note) {
+            const map = {
+                C4: 261.63, C4s: 277.18, D4: 293.66, E4: 329.63, F4: 349.23, G4: 392.00, A4: 440.00,
+                B4: 493.88, C5: 523.25, D5: 587.33, E5: 659.25, F5: 698.46, G5: 783.99, A5: 880.00
+            };
+            return map[note] || 440;
+        }
+
+        function playBirthdaySong() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+
+            const melody = [
+                ['G4', 0.45], ['G4', 0.2], ['A4', 0.65], ['G4', 0.65], ['C5', 0.65], ['B4', 1.1],
+                ['G4', 0.45], ['G4', 0.2], ['A4', 0.65], ['G4', 0.65], ['D5', 0.65], ['C5', 1.1]
+            ];
+
+            let start = audioCtx.currentTime + 0.05;
+            melody.forEach(([note, duration], idx) => {
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = 'triangle';
+                osc.frequency.value = noteFrequency(note);
+                gain.gain.setValueAtTime(0.0001, start);
+                gain.gain.exponentialRampToValueAtTime(0.12, start + 0.04);
+                gain.gain.exponentialRampToValueAtTime(0.0001, start + duration);
+                osc.connect(gain).connect(audioCtx.destination);
+                osc.start(start);
+                osc.stop(start + duration + 0.02);
+                start += duration + (idx % 3 === 2 ? 0.12 : 0.04);
+            });
+        }
+
+        function showCelebration() {
+            celebration.classList.add('show');
+            document.getElementById('questionText').textContent = 'She said yes!';
+            document.getElementById('hintText').textContent = 'Scroll down to enjoy the message, carousel, and letter.';
+            decisionCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            createSparkles();
+        }
+
+        noBtn.addEventListener('click', () => {
+            noCount += 1;
+            growYes();
+
+            if (noCount >= 3) {
+                moveNoButton();
+                document.getElementById('hintText').textContent = 'Now the no button is shy and trying to escape.';
+            } else {
+                noBtn.classList.toggle('spaced', noCount % 2 === 1);
+                document.getElementById('hintText').textContent = 'The yes button is getting bigger. Try No again.';
+            }
+        });
+
+        yesBtn.addEventListener('click', () => {
+            showCelebration();
+            playBirthdaySong();
+        });
+
+        musicBtn.addEventListener('click', () => {
+            playBirthdaySong();
+        });
+
+        letterBtn.addEventListener('click', () => {
+            letterModal.classList.add('show');
+            letterModal.setAttribute('aria-hidden', 'false');
+        });
+
+        closeLetterBtn.addEventListener('click', () => {
+            letterModal.classList.remove('show');
+            letterModal.setAttribute('aria-hidden', 'true');
+        });
+
+        letterModal.addEventListener('click', (event) => {
+            if (event.target === letterModal) {
+                letterModal.classList.remove('show');
+                letterModal.setAttribute('aria-hidden', 'true');
+            }
+        });
+
+        createSparkles();
+    </script>
+</body>
+</html>

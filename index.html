@@ -3,27 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Mother's Day, Mom!</title>
+    <title>Bible Jumble Games</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Animated background hearts -->
-    <div class="bg-hearts">
-        <div class="bg-heart heart1"></div>
-        <div class="bg-heart heart2"></div>
-        <div class="bg-heart heart3"></div>
-        <div class="bg-heart heart4"></div>
-        <div class="bg-heart heart5"></div>
-    </div>
-    <div class="container">
-        <h1>Hello, Mom</h1>
-        <p class="subtitle">How are you?</p>
-        <div class="buttons">
-            <button id="fineBtn" class="main-btn">I'm Fine</button>
-            <button id="notGoodBtn" class="main-btn">Not So Good</button>
-        </div>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <div class="page-glow page-glow-a"></div>
+    <div class="page-glow page-glow-b"></div>
+
+    <main class="game-shell">
+        <section class="hero-card">
+            <p class="eyebrow">Bible Word Challenge</p>
+            <h1>Bible Jumble Games</h1>
+            <p class="hero-copy">
+                Unscramble the letters, read the clue, and guess the Bible character or book.
+                A simple, colorful game for learning and fun.
+            </p>
+
+            <div class="stats">
+                <div class="stat">
+                    <span class="stat-label">Score</span>
+                    <strong id="score">0</strong>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Solved</span>
+                    <strong><span id="solved">0</span>/<span id="total">20</span></strong>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Streak</span>
+                    <strong id="streak">0</strong>
+                </div>
+            </div>
+
+            <div class="mode-switch" role="tablist" aria-label="Game categories">
+                <button class="mode-btn active" data-category="characters" role="tab">Bible Characters</button>
+                <button class="mode-btn" data-category="books" role="tab">Books of the Bible</button>
+                <button class="mode-btn" data-category="identification" role="tab">Identification</button>
+                <button class="mode-btn ghost" id="randomBtn" type="button">Random Mix</button>
+                <a class="mode-btn ghost" href="chelsea.html">Open Birthday Surprise</a>
+            </div>
+        </section>
+
+        <section class="board">
+            <div class="card current-card">
+                <div class="card-header">
+                    <span class="pill" id="categoryLabel">Bible Characters</span>
+                    <span class="pill soft" id="progressLabel">1 of 10</span>
+                </div>
+
+                <div class="jumble-box" aria-live="polite">
+                    <div class="question-heading">
+                        <span class="jumble-label" id="jumbleLabel">Question</span>
+                        <span class="question-timer"><span id="timer">10</span>s</span>
+                    </div>
+                    <div class="jumble-word question-display" id="jumbleWord">He led the Israelites out of Egypt.</div>
+                </div>
+
+                <div class="actions">
+                    <button id="hintBtn" class="secondary-btn" type="button">Reveal Answer</button>
+                    <button id="skipBtn" class="secondary-btn" type="button">Skip</button>
+                    <button id="nextBtn" class="secondary-btn" type="button">Next Word</button>
+                </div>
+
+                <p class="message" id="message">Read the question, then reveal the answer when ready.</p>
+                <div class="answer-reveal" id="answerReveal"></div>
+            </div>
+
+        </section>
+    </main>
+
     <script src="script.js"></script>
 </body>
 </html>
