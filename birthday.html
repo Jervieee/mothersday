@@ -23,15 +23,18 @@
         h1, h2 { margin: 0; font-family: "DM Serif Display", Georgia, serif; font-weight: 400; }
         h1 { margin-top: 14px; font-size: clamp(4rem, 12vw, 8.8rem); line-height: .88; text-shadow: 0 10px 25px #1b0d08; }
         .subtitle { max-width: 580px; margin: 24px auto 0; color: #f8dfc7; font-size: 1.05rem; line-height: 1.8; }
-        .flower-stage { min-height: 470px; display: grid; place-items: end center; position: relative; margin-top: 18px; }
-        .sunflower { position: relative; width: 210px; height: 400px; transform-origin: bottom center; animation: grow 2.8s cubic-bezier(.18,.9,.28,1) both; filter: drop-shadow(0 20px 18px rgba(0,0,0,.28)); }
-        .petals { position: absolute; left: 50%; top: 22px; width: 190px; height: 190px; transform: translateX(-50%); }
-        .petal { position: absolute; left: 80px; top: 0; width: 30px; height: 91px; border-radius: 50% 50% 44% 44%; background: linear-gradient(#ffe58a, #f6ad24); transform-origin: 15px 95px; }
-        .petal:nth-child(1) { transform: rotate(0deg); } .petal:nth-child(2) { transform: rotate(45deg); } .petal:nth-child(3) { transform: rotate(90deg); } .petal:nth-child(4) { transform: rotate(135deg); } .petal:nth-child(5) { transform: rotate(180deg); } .petal:nth-child(6) { transform: rotate(225deg); } .petal:nth-child(7) { transform: rotate(270deg); } .petal:nth-child(8) { transform: rotate(315deg); }
-        .center { position: absolute; inset: 54px; border-radius: 50%; background: radial-gradient(circle at 38% 32%, #9a5b25 0 8%, #4c2614 9% 22%, #713918 23% 100%); border: 7px solid #e89b20; }
-        .stem { position: absolute; left: 98px; top: 185px; width: 15px; height: 215px; border-radius: 20px; background: linear-gradient(90deg, #397545, #83b958 50%, #2a5938); }
-        .leaf { position: absolute; width: 75px; height: 35px; background: linear-gradient(135deg, #78ae55, #356b3e); border-radius: 100% 0 100% 0; }
-        .leaf.left { left: 26px; top: 280px; transform: rotate(24deg); } .leaf.right { right: 12px; top: 235px; transform: rotate(150deg); }
+        .flower-stage { min-height: 500px; display: grid; place-items: end center; position: relative; margin-top: 18px; overflow: hidden; }
+        .flower-stage::after { content: ""; position: absolute; bottom: 0; width: min(560px, 90%); height: 26px; border-radius: 50%; background: rgba(10, 8, 5, .35); filter: blur(15px); }
+        .sunflower { width: 300px; height: 500px; transform-origin: bottom center; animation: grow 2.8s cubic-bezier(.18,.9,.28,1) both; filter: drop-shadow(0 22px 17px rgba(0,0,0,.3)); }
+        .realistic-flower { width: 100%; height: 100%; overflow: visible; }
+        .petal-group { transform-origin: 150px 145px; animation: breathe 5s ease-in-out 2.8s infinite; }
+        .petal-back { fill: url(#petalBack); stroke: rgba(176, 98, 11, .35); stroke-width: 1.5; }
+        .petal-front { fill: url(#petalFront); stroke: rgba(194, 113, 13, .28); stroke-width: 1.2; }
+        .seed-ring { fill: url(#seedTexture); stroke: #c27a1a; stroke-width: 6; }
+        .stem-shape { fill: url(#stemTexture); stroke: #2b5835; stroke-width: 2; }
+        .leaf-shape { fill: url(#leafTexture); stroke: #2c5c36; stroke-width: 2; }
+        .leaf-vein { fill: none; stroke: rgba(211, 235, 142, .45); stroke-width: 2; stroke-linecap: round; }
+        .sunlight { fill: rgba(255, 255, 218, .18); }
         .message { max-width: 720px; margin: 0 auto; padding: 35px 28px; text-align: center; border: 1px solid rgba(255,255,255,.2); border-radius: 30px; background: rgba(255,248,233,.1); backdrop-filter: blur(10px); animation: fade-in 1.2s .6s ease both; }
         .message h2 { font-size: clamp(2.2rem, 6vw, 4rem); color: #ffe18c; } .message p { color: #f8dfc7; line-height: 1.8; }
         .actions { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-top: 24px; }
@@ -40,8 +43,9 @@
         .letter { display: none; max-width: 650px; margin: 22px auto 0; padding: 28px; color: var(--ink); border-radius: 24px; background: var(--cream); line-height: 1.8; animation: fade-in .5s ease both; }
         .letter.show { display: block; } .letter h2 { color: #8d4c35; }
         @keyframes grow { from { transform: scale(.18) translateY(80px); opacity: 0; } to { transform: scale(1) translateY(0); opacity: 1; } }
+        @keyframes breathe { 0%, 100% { transform: rotate(-1deg); } 50% { transform: rotate(1deg); } }
         @keyframes fade-in { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
-        @media (max-width: 600px) { .flower-stage { min-height: 400px; } .sunflower { transform: scale(.82); animation-name: grow-mobile; } @keyframes grow-mobile { from { transform: scale(.15) translateY(80px); opacity: 0; } to { transform: scale(.82) translateY(0); opacity: 1; } } }
+        @media (max-width: 600px) { .flower-stage { min-height: 430px; } .sunflower { transform: scale(.82); animation-name: grow-mobile; } @keyframes grow-mobile { from { transform: scale(.15) translateY(80px); opacity: 0; } to { transform: scale(.82) translateY(0); opacity: 1; } } }
     </style>
 </head>
 <body>
@@ -53,8 +57,26 @@
         </section>
         <section class="flower-stage" aria-label="A growing sunflower">
             <div class="sunflower">
-                <div class="petals"><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><b class="center"></b></div>
-                <div class="stem"></div><i class="leaf left"></i><i class="leaf right"></i>
+                <svg class="realistic-flower" viewBox="0 0 300 500" role="img" aria-label="A realistic golden sunflower">
+                    <defs>
+                        <linearGradient id="petalBack" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff2a7"/><stop offset=".42" stop-color="#ffd34f"/><stop offset="1" stop-color="#d88913"/></linearGradient>
+                        <linearGradient id="petalFront" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ffe98a"/><stop offset=".5" stop-color="#f7b92e"/><stop offset="1" stop-color="#c9750e"/></linearGradient>
+                        <linearGradient id="stemTexture" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#244e30"/><stop offset=".3" stop-color="#6f9e45"/><stop offset=".55" stop-color="#3e7738"/><stop offset="1" stop-color="#1e472c"/></linearGradient>
+                        <linearGradient id="leafTexture" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#9fc55e"/><stop offset=".48" stop-color="#4d8d3d"/><stop offset="1" stop-color="#245436"/></linearGradient>
+                        <radialGradient id="seedTexture" cx="35%" cy="28%"><stop stop-color="#9d5a25"/><stop offset=".5" stop-color="#633416"/><stop offset="1" stop-color="#321b12"/></radialGradient>
+                        <filter id="softGlow"><feGaussianBlur stdDeviation="5"/></filter>
+                        <pattern id="seeds" width="13" height="13" patternUnits="userSpaceOnUse"><circle cx="3" cy="4" r="2" fill="#25150e"/><circle cx="9" cy="10" r="2" fill="#b36b25"/></pattern>
+                    </defs>
+                    <ellipse class="sunlight" cx="112" cy="85" rx="95" ry="70" filter="url(#softGlow)"/>
+                    <path class="stem-shape" d="M143 155 C145 252 137 355 145 492 L170 492 C162 353 171 253 160 155 Z"/>
+                    <path class="leaf-shape" d="M147 335 C105 289 55 306 32 350 C77 373 116 365 149 350 Z"/><path class="leaf-vein" d="M43 348 C82 344 112 347 145 347"/>
+                    <path class="leaf-shape" d="M160 280 C187 222 232 220 258 243 C239 291 202 314 163 304 Z"/><path class="leaf-vein" d="M170 298 C198 274 222 253 248 240"/>
+                    <g class="petal-group">
+                        <g class="petal-back"><ellipse cx="150" cy="45" rx="23" ry="92"/><ellipse cx="150" cy="45" rx="23" ry="92" transform="rotate(45 150 145)"/><ellipse cx="150" cy="45" rx="23" ry="92" transform="rotate(90 150 145)"/><ellipse cx="150" cy="45" rx="23" ry="92" transform="rotate(135 150 145)"/><ellipse cx="150" cy="45" rx="23" ry="92" transform="rotate(180 150 145)"/><ellipse cx="150" cy="45" rx="23" ry="92" transform="rotate(225 150 145)"/><ellipse cx="150" cy="45" rx="23" ry="92" transform="rotate(270 150 145)"/><ellipse cx="150" cy="45" rx="23" ry="92" transform="rotate(315 150 145)"/></g>
+                        <g class="petal-front"><ellipse cx="150" cy="58" rx="18" ry="78" transform="rotate(22.5 150 145)"/><ellipse cx="150" cy="58" rx="18" ry="78" transform="rotate(67.5 150 145)"/><ellipse cx="150" cy="58" rx="18" ry="78" transform="rotate(112.5 150 145)"/><ellipse cx="150" cy="58" rx="18" ry="78" transform="rotate(157.5 150 145)"/><ellipse cx="150" cy="58" rx="18" ry="78" transform="rotate(202.5 150 145)"/><ellipse cx="150" cy="58" rx="18" ry="78" transform="rotate(247.5 150 145)"/><ellipse cx="150" cy="58" rx="18" ry="78" transform="rotate(292.5 150 145)"/><ellipse cx="150" cy="58" rx="18" ry="78" transform="rotate(337.5 150 145)"/></g>
+                        <circle class="seed-ring" cx="150" cy="145" r="61"/><circle cx="150" cy="145" r="54" fill="url(#seeds)" opacity=".9"/><ellipse cx="132" cy="125" rx="20" ry="13" fill="rgba(255,205,102,.18)"/>
+                    </g>
+                </svg>
             </div>
         </section>
         <section class="message">
