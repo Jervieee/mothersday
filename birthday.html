@@ -1,104 +1,55 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday, Chelsea</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        :root { --cream: #fff8e9; --gold: #ffc44f; --ink: #342014; --rose: #ef8c91; }
-        * { box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        body {
-            margin: 0; min-height: 100vh; overflow-x: hidden; color: var(--cream);
-            font-family: Inter, sans-serif;
-            background: radial-gradient(circle at 50% 12%, #925b2c 0, #482917 43%, #24140f 100%);
-        }
-        body::before { content: ""; position: fixed; inset: 0; opacity: .2; pointer-events: none; background-image: radial-gradient(#fff 1px, transparent 1px); background-size: 30px 30px; }
-        main { position: relative; z-index: 1; width: min(980px, calc(100% - 28px)); margin: auto; padding: 26px 0 70px; }
-        .top { text-align: center; padding: 30px 16px 0; animation: fade-in 1s ease both; }
-        .eyebrow { color: #ffd976; letter-spacing: .28em; font-size: .75rem; font-weight: 800; text-transform: uppercase; }
-        h1, h2 { margin: 0; font-family: "DM Serif Display", Georgia, serif; font-weight: 400; }
-        h1 { margin-top: 14px; font-size: clamp(4rem, 12vw, 8.8rem); line-height: .88; text-shadow: 0 10px 25px #1b0d08; }
-        .subtitle { max-width: 580px; margin: 24px auto 0; color: #f8dfc7; font-size: 1.05rem; line-height: 1.8; }
-        .flower-stage { min-height: 500px; display: grid; place-items: end center; position: relative; margin-top: 18px; overflow: hidden; }
-        .flower-stage::after { content: ""; position: absolute; bottom: 0; width: min(560px, 90%); height: 26px; border-radius: 50%; background: rgba(10, 8, 5, .35); filter: blur(15px); }
-        .sunflower { width: 300px; height: 500px; transform-origin: bottom center; animation: grow 2.8s cubic-bezier(.18,.9,.28,1) both; filter: drop-shadow(0 22px 17px rgba(0,0,0,.3)); }
-        .realistic-flower { width: 100%; height: 100%; overflow: visible; }
-        .petal-group { transform-origin: 150px 145px; animation: breathe 5s ease-in-out 2.8s infinite; }
-        .petal-back { fill: url(#petalBack); stroke: rgba(176, 98, 11, .35); stroke-width: 1.5; }
-        .petal-front { fill: url(#petalFront); stroke: rgba(194, 113, 13, .28); stroke-width: 1.2; }
-        .seed-ring { fill: url(#seedTexture); stroke: #c27a1a; stroke-width: 6; }
-        .stem-shape { fill: url(#stemTexture); stroke: #2b5835; stroke-width: 2; }
-        .leaf-shape { fill: url(#leafTexture); stroke: #2c5c36; stroke-width: 2; }
-        .leaf-vein { fill: none; stroke: rgba(211, 235, 142, .45); stroke-width: 2; stroke-linecap: round; }
-        .sunlight { fill: rgba(255, 255, 218, .18); }
-        .message { max-width: 720px; margin: 0 auto; padding: 35px 28px; text-align: center; border: 1px solid rgba(255,255,255,.2); border-radius: 30px; background: rgba(255,248,233,.1); backdrop-filter: blur(10px); animation: fade-in 1.2s .6s ease both; }
-        .message h2 { font-size: clamp(2.2rem, 6vw, 4rem); color: #ffe18c; } .message p { color: #f8dfc7; line-height: 1.8; }
-        .actions { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-top: 24px; }
-        button { border: 0; border-radius: 999px; padding: 15px 22px; font: inherit; font-weight: 800; cursor: pointer; color: var(--ink); background: var(--gold); box-shadow: 0 10px 26px rgba(255,196,79,.2); }
-        button.secondary { color: var(--cream); background: rgba(255,255,255,.13); border: 1px solid rgba(255,255,255,.2); }
-        .letter { display: none; max-width: 650px; margin: 22px auto 0; padding: 28px; color: var(--ink); border-radius: 24px; background: var(--cream); line-height: 1.8; animation: fade-in .5s ease both; }
-        .letter.show { display: block; } .letter h2 { color: #8d4c35; }
-        @keyframes grow { from { transform: scale(.18) translateY(80px); opacity: 0; } to { transform: scale(1) translateY(0); opacity: 1; } }
-        @keyframes breathe { 0%, 100% { transform: rotate(-1deg); } 50% { transform: rotate(1deg); } }
-        @keyframes fade-in { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
-        @media (max-width: 600px) { .flower-stage { min-height: 430px; } .sunflower { transform: scale(.82); animation-name: grow-mobile; } @keyframes grow-mobile { from { transform: scale(.15) translateY(80px); opacity: 0; } to { transform: scale(.82) translateY(0); opacity: 1; } } }
-    </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Happy Birthday, Chelsea</title>
+  <style>
+    :root { --cream:#fff0cd; --gold:#ffc94f; --ink:#3a2114; }
+    * { box-sizing:border-box; }
+    body { margin:0; min-height:100vh; overflow:hidden; display:grid; place-items:end center; background:#3a2114; font-family:Georgia,serif; }
+    .scene { position:relative; width:min(680px,100vw); height:min(820px,100vh); overflow:hidden; isolation:isolate; background:radial-gradient(ellipse at 68% 13%,rgba(255,225,142,.4),transparent 25%),linear-gradient(180deg,#6d371d,#b35d2c 58%,#7c421f 100%); }
+    .sun { position:absolute; width:150px; aspect-ratio:1; top:54px; right:70px; border-radius:50%; background:#ffd879; box-shadow:0 0 65px 25px rgba(255,195,79,.37); animation:sun-pulse 6s ease-in-out infinite; }
+    .hill { position:absolute; bottom:-62px; width:130%; height:190px; border-radius:50% 50% 0 0; background:linear-gradient(#3d702f,#204a27); animation:hill-breathe 8s ease-in-out infinite; }
+    .hill.one { left:-42%; transform:rotate(3deg); opacity:.9; } .hill.two { right:-42%; background:linear-gradient(#5b8b34,#326226); animation-delay:-3s; }
+    .dots { position:absolute; inset:0; opacity:.38; background-image:radial-gradient(#ffd888 1px,transparent 1.5px); background-size:32px 32px; mix-blend-mode:screen; animation:dust 16s linear infinite; }
+    .caption { position:absolute; z-index:5; top:28px; left:30px; color:#fff0cd; letter-spacing:.18em; text-transform:uppercase; font:800 12px system-ui,sans-serif; opacity:.85; animation:fade-up 1s .2s both; }
+    .headline { position:absolute; z-index:5; top:62px; left:30px; color:#fff8e8; text-shadow:0 4px 16px rgba(48,20,8,.4); animation:fade-up 1s .45s both; }
+    .headline h1 { margin:0; max-width:8ch; font-size:clamp(2.4rem,8vw,4.8rem); line-height:.9; font-weight:400; }
+    .headline p { margin:17px 0 0; max-width:270px; color:#ffe6b7; line-height:1.5; font:600 14px system-ui,sans-serif; }
+    .flower { position:absolute; z-index:3; left:50%; bottom:38px; width:330px; height:610px; transform:translateX(-50%); filter:drop-shadow(8px 14px 10px rgba(24,10,4,.32)); animation:flower-grow 2.5s cubic-bezier(.18,.9,.28,1) both; }
+    .stem { position:absolute; left:157px; top:252px; width:22px; height:370px; border-radius:15px; background:linear-gradient(90deg,#1f632e,#4eaa48 47%,#1d682c); box-shadow:inset -4px 0 5px #155023; transform-origin:top; animation:stem-sway 5s ease-in-out 2.5s infinite; }
+    .leaf { position:absolute; width:116px; height:62px; background:linear-gradient(135deg,#5eaa48,#1f692e); border-radius:100% 0 100% 0; }
+    .leaf:after { content:""; position:absolute; width:1px; height:105px; left:56px; top:-19px; background:rgba(228,255,187,.55); transform:rotate(49deg); }
+    .leaf.left { left:52px; top:420px; transform:rotate(15deg) scaleX(-1); animation:leaf-left 5s ease-in-out 2.5s infinite; }
+    .leaf.right { left:179px; top:345px; transform:rotate(-25deg); animation:leaf-right 5s ease-in-out 2.5s infinite; }
+    .head { position:absolute; top:66px; left:49px; width:220px; aspect-ratio:1; animation:head-sway 5s ease-in-out 2.5s infinite; }
+    .petal { position:absolute; left:82px; top:0; width:56px; height:128px; border-radius:58% 42% 52% 48%; transform-origin:28px 110px; background:linear-gradient(90deg,#f6a926 0%,#ffe477 55%,#f2ae2c 100%); box-shadow:inset 7px 0 10px rgba(177,91,8,.15); animation:petal-shimmer 4s ease-in-out infinite; }
+    .p1{transform:rotate(0deg)} .p2{transform:rotate(45deg);animation-delay:-.5s} .p3{transform:rotate(90deg);animation-delay:-1s} .p4{transform:rotate(135deg);animation-delay:-1.5s} .p5{transform:rotate(180deg);animation-delay:-2s} .p6{transform:rotate(225deg);animation-delay:-2.5s} .p7{transform:rotate(270deg);animation-delay:-3s} .p8{transform:rotate(315deg);animation-delay:-3.5s}
+    .disc { position:absolute; z-index:2; left:48px; top:48px; width:124px; aspect-ratio:1; border-radius:50%; border:8px solid #e39418; background:radial-gradient(circle at 35% 30%,#a95818 0 7%,#663010 8% 15%,transparent 16%),repeating-radial-gradient(circle,#633011 0 3px,#7c3c14 4px 7px); box-shadow:inset 0 0 17px #3d1b09,0 5px 3px rgba(89,38,7,.28); animation:disc-glow 4s ease-in-out infinite; }
+    .disc:after { content:""; position:absolute; inset:16px; border-radius:50%; background:repeating-conic-gradient(rgba(255,190,64,.12) 0deg 5deg,transparent 5deg 13deg); }
+    .message { position:absolute; z-index:6; left:20px; right:20px; bottom:20px; padding:17px 20px; color:var(--cream); text-align:center; border:1px solid rgba(255,240,205,.3); border-radius:22px; background:rgba(48,24,13,.62); backdrop-filter:blur(10px); animation:fade-up 1s 1s both; }
+    .message strong { display:block; font-size:clamp(1.35rem,4vw,2rem); font-weight:400; } .message span { display:block; margin-top:5px; color:#ffe2a7; font:600 12px system-ui,sans-serif; }
+    .actions { display:flex; justify-content:center; gap:8px; margin-top:12px; } button { border:0; border-radius:999px; padding:10px 15px; color:var(--ink); background:var(--gold); font:800 12px system-ui,sans-serif; cursor:pointer; } button.secondary { color:var(--cream); background:rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.25); }
+    .letter { display:none; position:absolute; z-index:10; left:20px; right:20px; bottom:20px; padding:25px; color:var(--ink); text-align:left; border-radius:22px; background:#fff6df; box-shadow:0 20px 50px rgba(30,12,4,.45); animation:fade-up .45s both; font:15px/1.75 system-ui,sans-serif; } .letter.show { display:block; } .letter h2 { margin:0 0 8px; color:#8d4c35; font:400 30px Georgia,serif; } .letter button { width:100%; margin-top:8px; }
+    @keyframes flower-grow { from { transform:translateX(-50%) scale(.12) translateY(100px); opacity:0; } to { transform:translateX(-50%) scale(1) translateY(0); opacity:1; } }
+    @keyframes petal-shimmer { 0%,100% { filter:brightness(1); } 50% { filter:brightness(1.1); } } @keyframes head-sway { 0%,100% { transform:rotate(-1deg); } 50% { transform:rotate(1.5deg); } } @keyframes stem-sway { 0%,100% { transform:rotate(-1deg); } 50% { transform:rotate(1deg); } } @keyframes leaf-left { 0%,100% { transform:rotate(15deg) scaleX(-1); } 50% { transform:rotate(20deg) scaleX(-1); } } @keyframes leaf-right { 0%,100% { transform:rotate(-25deg); } 50% { transform:rotate(-19deg); } } @keyframes sun-pulse { 0%,100% { box-shadow:0 0 65px 25px rgba(255,195,79,.37); } 50% { box-shadow:0 0 84px 34px rgba(255,195,79,.48); } } @keyframes hill-breathe { 0%,100% { margin-left:0; } 50% { margin-left:8px; } } @keyframes dust { from { transform:translate(0,0); } to { transform:translate(25px,18px); } } @keyframes disc-glow { 0%,100% { box-shadow:inset 0 0 17px #3d1b09,0 5px 3px rgba(89,38,7,.28); } 50% { box-shadow:inset 0 0 20px #3d1b09,0 5px 12px rgba(255,167,48,.28); } } @keyframes fade-up { from { opacity:0; transform:translateY(18px); } to { opacity:1; transform:translateY(0); } }
+    @media (max-width:500px) { .sun { right:25px; top:35px; width:110px; } .flower { transform:translateX(-50%) scale(.78); transform-origin:bottom center; } .headline { top:58px; left:20px; } .message { left:12px; right:12px; bottom:12px; } }
+  </style>
 </head>
 <body>
-    <main>
-        <section class="top">
-            <div class="eyebrow">For someone wonderfully special</div>
-            <h1>Happy Birthday,<br>Chelsea</h1>
-            <p class="subtitle">You make ordinary days feel like sunshine. Today is a celebration of you.</p>
-        </section>
-        <section class="flower-stage" aria-label="A growing sunflower">
-            <div class="sunflower">
-                <svg class="realistic-flower" viewBox="0 0 300 500" role="img" aria-label="A realistic golden sunflower">
-                    <defs>
-                        <linearGradient id="petalBack" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff2a7"/><stop offset=".42" stop-color="#ffd34f"/><stop offset="1" stop-color="#d88913"/></linearGradient>
-                        <linearGradient id="petalFront" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ffe98a"/><stop offset=".5" stop-color="#f7b92e"/><stop offset="1" stop-color="#c9750e"/></linearGradient>
-                        <linearGradient id="stemTexture" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#244e30"/><stop offset=".3" stop-color="#6f9e45"/><stop offset=".55" stop-color="#3e7738"/><stop offset="1" stop-color="#1e472c"/></linearGradient>
-                        <linearGradient id="leafTexture" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#9fc55e"/><stop offset=".48" stop-color="#4d8d3d"/><stop offset="1" stop-color="#245436"/></linearGradient>
-                        <radialGradient id="seedTexture" cx="35%" cy="28%"><stop stop-color="#9d5a25"/><stop offset=".5" stop-color="#633416"/><stop offset="1" stop-color="#321b12"/></radialGradient>
-                        <filter id="softGlow"><feGaussianBlur stdDeviation="5"/></filter>
-                        <pattern id="seeds" width="13" height="13" patternUnits="userSpaceOnUse"><circle cx="3" cy="4" r="2" fill="#25150e"/><circle cx="9" cy="10" r="2" fill="#b36b25"/></pattern>
-                    </defs>
-                    <ellipse class="sunlight" cx="112" cy="85" rx="95" ry="70" filter="url(#softGlow)"/>
-                    <path class="stem-shape" d="M143 155 C145 252 137 355 145 492 L170 492 C162 353 171 253 160 155 Z"/>
-                    <path class="leaf-shape" d="M147 335 C105 289 55 306 32 350 C77 373 116 365 149 350 Z"/><path class="leaf-vein" d="M43 348 C82 344 112 347 145 347"/>
-                    <path class="leaf-shape" d="M160 280 C187 222 232 220 258 243 C239 291 202 314 163 304 Z"/><path class="leaf-vein" d="M170 298 C198 274 222 253 248 240"/>
-                    <g class="petal-group">
-                        <g class="petal-back"><ellipse cx="150" cy="45" rx="23" ry="92"/><ellipse cx="150" cy="45" rx="23" ry="92" transform="rotate(45 150 145)"/><ellipse cx="150" cy="45" rx="23" ry="92" transform="rotate(90 150 145)"/><ellipse cx="150" cy="45" rx="23" ry="92" transform="rotate(135 150 145)"/><ellipse cx="150" cy="45" rx="23" ry="92" transform="rotate(180 150 145)"/><ellipse cx="150" cy="45" rx="23" ry="92" transform="rotate(225 150 145)"/><ellipse cx="150" cy="45" rx="23" ry="92" transform="rotate(270 150 145)"/><ellipse cx="150" cy="45" rx="23" ry="92" transform="rotate(315 150 145)"/></g>
-                        <g class="petal-front"><ellipse cx="150" cy="58" rx="18" ry="78" transform="rotate(22.5 150 145)"/><ellipse cx="150" cy="58" rx="18" ry="78" transform="rotate(67.5 150 145)"/><ellipse cx="150" cy="58" rx="18" ry="78" transform="rotate(112.5 150 145)"/><ellipse cx="150" cy="58" rx="18" ry="78" transform="rotate(157.5 150 145)"/><ellipse cx="150" cy="58" rx="18" ry="78" transform="rotate(202.5 150 145)"/><ellipse cx="150" cy="58" rx="18" ry="78" transform="rotate(247.5 150 145)"/><ellipse cx="150" cy="58" rx="18" ry="78" transform="rotate(292.5 150 145)"/><ellipse cx="150" cy="58" rx="18" ry="78" transform="rotate(337.5 150 145)"/></g>
-                        <circle class="seed-ring" cx="150" cy="145" r="61"/><circle cx="150" cy="145" r="54" fill="url(#seeds)" opacity=".9"/><ellipse cx="132" cy="125" rx="20" ry="13" fill="rgba(255,205,102,.18)"/>
-                    </g>
-                </svg>
-            </div>
-        </section>
-        <section class="message">
-            <h2>To the most special friend in my life</h2>
-            <p>May your new year bloom with laughter, beautiful surprises, peaceful moments, and every happiness you deserve.</p>
-            <div class="actions"><button id="musicBtn" type="button">Play birthday song</button><button class="secondary" id="letterBtn" type="button">Open your letter</button></div>
-            <article class="letter" id="letter"><h2>A letter for you</h2><p>Dear Chelsea,<br><br>You are one of the brightest gifts in my life. Thank you for being kind, unforgettable, and wonderfully you. I hope today reminds you how loved and cherished you are. May this year bring answered prayers, joyful memories, and beautiful new beginnings.<br><br>Happy birthday, always.</p></article>
-        </section>
-    </main>
-    <script>
-        let audioCtx;
-        const notes = { G4: 392, A4: 440, B4: 494, C5: 523, D5: 587 };
-        function playBirthdaySong() {
-            audioCtx ||= new (window.AudioContext || window.webkitAudioContext)();
-            const melody = [['G4', .45], ['G4', .2], ['A4', .65], ['G4', .65], ['C5', .65], ['B4', 1.1], ['G4', .45], ['G4', .2], ['A4', .65], ['G4', .65], ['D5', .65], ['C5', 1.1]];
-            let at = audioCtx.currentTime + .05;
-            melody.forEach(([note, length]) => { const oscillator = audioCtx.createOscillator(); const gain = audioCtx.createGain(); oscillator.type = 'triangle'; oscillator.frequency.value = notes[note]; gain.gain.setValueAtTime(.0001, at); gain.gain.exponentialRampToValueAtTime(.12, at + .04); gain.gain.exponentialRampToValueAtTime(.0001, at + length); oscillator.connect(gain).connect(audioCtx.destination); oscillator.start(at); oscillator.stop(at + length + .02); at += length + .05; });
-        }
-        window.addEventListener('load', () => { try { playBirthdaySong(); } catch (error) {} });
-        document.addEventListener('click', () => { if (audioCtx?.state === 'suspended') audioCtx.resume(); }, { once: true });
-        document.getElementById('musicBtn').addEventListener('click', playBirthdaySong);
-        document.getElementById('letterBtn').addEventListener('click', () => document.getElementById('letter').classList.toggle('show'));
-    </script>
+  <main class="scene" aria-label="A realistic stylized sunflower at sunset">
+    <div class="dots"></div><div class="sun"></div><div class="caption">Bloom where you are planted</div>
+    <div class="headline"><h1>Happy Birthday,<br>Chelsea</h1><p>For the most special friend in my life.</p></div>
+    <div class="hill one"></div><div class="hill two"></div>
+    <div class="flower" aria-label="A growing sunflower"><div class="stem"></div><div class="leaf left"></div><div class="leaf right"></div><div class="head"><i class="petal p1"></i><i class="petal p2"></i><i class="petal p3"></i><i class="petal p4"></i><i class="petal p5"></i><i class="petal p6"></i><i class="petal p7"></i><i class="petal p8"></i><div class="disc"></div></div></div>
+    <div class="message"><strong>May your year bloom beautifully.</strong><span>With love, laughter, and sunshine always.</span><div class="actions"><button id="musicBtn" type="button">Play birthday song</button><button class="secondary" id="letterBtn" type="button">Open your letter</button></div></div>
+    <article class="letter" id="letter"><h2>A letter for you</h2>Dear Chelsea,<br><br>You are one of the brightest gifts in my life. I hope this birthday brings you peace, laughter, beautiful memories, and every happiness you deserve.<br><br>Happy birthday, always.<button id="closeLetter" type="button">Close letter</button></article>
+  </main>
+  <script>
+    let audioCtx; const notes={G4:392,A4:440,B4:494,C5:523,D5:587};
+    function playBirthdaySong(){ audioCtx ||= new(window.AudioContext||window.webkitAudioContext)(); const melody=[['G4',.45],['G4',.2],['A4',.65],['G4',.65],['C5',.65],['B4',1.1],['G4',.45],['G4',.2],['A4',.65],['G4',.65],['D5',.65],['C5',1.1]]; let at=audioCtx.currentTime+.05; melody.forEach(([note,length])=>{const oscillator=audioCtx.createOscillator(),gain=audioCtx.createGain(); oscillator.type='triangle'; oscillator.frequency.value=notes[note]; gain.gain.setValueAtTime(.0001,at); gain.gain.exponentialRampToValueAtTime(.12,at+.04); gain.gain.exponentialRampToValueAtTime(.0001,at+length); oscillator.connect(gain).connect(audioCtx.destination); oscillator.start(at); oscillator.stop(at+length+.02); at+=length+.05;}); }
+    window.addEventListener('load',()=>{try{playBirthdaySong();}catch(error){}}); document.addEventListener('click',()=>{if(audioCtx?.state==='suspended')audioCtx.resume();},{once:true}); musicBtn.addEventListener('click',playBirthdaySong); letterBtn.addEventListener('click',()=>letter.classList.add('show')); closeLetter.addEventListener('click',()=>letter.classList.remove('show'));
+  </script>
 </body>
 </html>
