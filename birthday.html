@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday, Chelsea</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root { --cream: #fff8e9; --gold: #ffc44f; --ink: #342014; --rose: #ef8c91; }
+        * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            margin: 0; min-height: 100vh; overflow-x: hidden; color: var(--cream);
+            font-family: Inter, sans-serif;
+            background: radial-gradient(circle at 50% 12%, #925b2c 0, #482917 43%, #24140f 100%);
+        }
+        body::before { content: ""; position: fixed; inset: 0; opacity: .2; pointer-events: none; background-image: radial-gradient(#fff 1px, transparent 1px); background-size: 30px 30px; }
+        main { position: relative; z-index: 1; width: min(980px, calc(100% - 28px)); margin: auto; padding: 26px 0 70px; }
+        .top { text-align: center; padding: 30px 16px 0; animation: fade-in 1s ease both; }
+        .eyebrow { color: #ffd976; letter-spacing: .28em; font-size: .75rem; font-weight: 800; text-transform: uppercase; }
+        h1, h2 { margin: 0; font-family: "DM Serif Display", Georgia, serif; font-weight: 400; }
+        h1 { margin-top: 14px; font-size: clamp(4rem, 12vw, 8.8rem); line-height: .88; text-shadow: 0 10px 25px #1b0d08; }
+        .subtitle { max-width: 580px; margin: 24px auto 0; color: #f8dfc7; font-size: 1.05rem; line-height: 1.8; }
+        .flower-stage { min-height: 470px; display: grid; place-items: end center; position: relative; margin-top: 18px; }
+        .sunflower { position: relative; width: 210px; height: 400px; transform-origin: bottom center; animation: grow 2.8s cubic-bezier(.18,.9,.28,1) both; filter: drop-shadow(0 20px 18px rgba(0,0,0,.28)); }
+        .petals { position: absolute; left: 50%; top: 22px; width: 190px; height: 190px; transform: translateX(-50%); }
+        .petal { position: absolute; left: 80px; top: 0; width: 30px; height: 91px; border-radius: 50% 50% 44% 44%; background: linear-gradient(#ffe58a, #f6ad24); transform-origin: 15px 95px; }
+        .petal:nth-child(1) { transform: rotate(0deg); } .petal:nth-child(2) { transform: rotate(45deg); } .petal:nth-child(3) { transform: rotate(90deg); } .petal:nth-child(4) { transform: rotate(135deg); } .petal:nth-child(5) { transform: rotate(180deg); } .petal:nth-child(6) { transform: rotate(225deg); } .petal:nth-child(7) { transform: rotate(270deg); } .petal:nth-child(8) { transform: rotate(315deg); }
+        .center { position: absolute; inset: 54px; border-radius: 50%; background: radial-gradient(circle at 38% 32%, #9a5b25 0 8%, #4c2614 9% 22%, #713918 23% 100%); border: 7px solid #e89b20; }
+        .stem { position: absolute; left: 98px; top: 185px; width: 15px; height: 215px; border-radius: 20px; background: linear-gradient(90deg, #397545, #83b958 50%, #2a5938); }
+        .leaf { position: absolute; width: 75px; height: 35px; background: linear-gradient(135deg, #78ae55, #356b3e); border-radius: 100% 0 100% 0; }
+        .leaf.left { left: 26px; top: 280px; transform: rotate(24deg); } .leaf.right { right: 12px; top: 235px; transform: rotate(150deg); }
+        .message { max-width: 720px; margin: 0 auto; padding: 35px 28px; text-align: center; border: 1px solid rgba(255,255,255,.2); border-radius: 30px; background: rgba(255,248,233,.1); backdrop-filter: blur(10px); animation: fade-in 1.2s .6s ease both; }
+        .message h2 { font-size: clamp(2.2rem, 6vw, 4rem); color: #ffe18c; } .message p { color: #f8dfc7; line-height: 1.8; }
+        .actions { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-top: 24px; }
+        button { border: 0; border-radius: 999px; padding: 15px 22px; font: inherit; font-weight: 800; cursor: pointer; color: var(--ink); background: var(--gold); box-shadow: 0 10px 26px rgba(255,196,79,.2); }
+        button.secondary { color: var(--cream); background: rgba(255,255,255,.13); border: 1px solid rgba(255,255,255,.2); }
+        .letter { display: none; max-width: 650px; margin: 22px auto 0; padding: 28px; color: var(--ink); border-radius: 24px; background: var(--cream); line-height: 1.8; animation: fade-in .5s ease both; }
+        .letter.show { display: block; } .letter h2 { color: #8d4c35; }
+        @keyframes grow { from { transform: scale(.18) translateY(80px); opacity: 0; } to { transform: scale(1) translateY(0); opacity: 1; } }
+        @keyframes fade-in { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+        @media (max-width: 600px) { .flower-stage { min-height: 400px; } .sunflower { transform: scale(.82); animation-name: grow-mobile; } @keyframes grow-mobile { from { transform: scale(.15) translateY(80px); opacity: 0; } to { transform: scale(.82) translateY(0); opacity: 1; } } }
+    </style>
+</head>
+<body>
+    <main>
+        <section class="top">
+            <div class="eyebrow">For someone wonderfully special</div>
+            <h1>Happy Birthday,<br>Chelsea</h1>
+            <p class="subtitle">You make ordinary days feel like sunshine. Today is a celebration of you.</p>
+        </section>
+        <section class="flower-stage" aria-label="A growing sunflower">
+            <div class="sunflower">
+                <div class="petals"><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><i class="petal"></i><b class="center"></b></div>
+                <div class="stem"></div><i class="leaf left"></i><i class="leaf right"></i>
+            </div>
+        </section>
+        <section class="message">
+            <h2>To the most special friend in my life</h2>
+            <p>May your new year bloom with laughter, beautiful surprises, peaceful moments, and every happiness you deserve.</p>
+            <div class="actions"><button id="musicBtn" type="button">Play birthday song</button><button class="secondary" id="letterBtn" type="button">Open your letter</button></div>
+            <article class="letter" id="letter"><h2>A letter for you</h2><p>Dear Chelsea,<br><br>You are one of the brightest gifts in my life. Thank you for being kind, unforgettable, and wonderfully you. I hope today reminds you how loved and cherished you are. May this year bring answered prayers, joyful memories, and beautiful new beginnings.<br><br>Happy birthday, always.</p></article>
+        </section>
+    </main>
+    <script>
+        let audioCtx;
+        const notes = { G4: 392, A4: 440, B4: 494, C5: 523, D5: 587 };
+        function playBirthdaySong() {
+            audioCtx ||= new (window.AudioContext || window.webkitAudioContext)();
+            const melody = [['G4', .45], ['G4', .2], ['A4', .65], ['G4', .65], ['C5', .65], ['B4', 1.1], ['G4', .45], ['G4', .2], ['A4', .65], ['G4', .65], ['D5', .65], ['C5', 1.1]];
+            let at = audioCtx.currentTime + .05;
+            melody.forEach(([note, length]) => { const oscillator = audioCtx.createOscillator(); const gain = audioCtx.createGain(); oscillator.type = 'triangle'; oscillator.frequency.value = notes[note]; gain.gain.setValueAtTime(.0001, at); gain.gain.exponentialRampToValueAtTime(.12, at + .04); gain.gain.exponentialRampToValueAtTime(.0001, at + length); oscillator.connect(gain).connect(audioCtx.destination); oscillator.start(at); oscillator.stop(at + length + .02); at += length + .05; });
+        }
+        window.addEventListener('load', () => { try { playBirthdaySong(); } catch (error) {} });
+        document.addEventListener('click', () => { if (audioCtx?.state === 'suspended') audioCtx.resume(); }, { once: true });
+        document.getElementById('musicBtn').addEventListener('click', playBirthdaySong);
+        document.getElementById('letterBtn').addEventListener('click', () => document.getElementById('letter').classList.toggle('show'));
+    </script>
+</body>
+</html>

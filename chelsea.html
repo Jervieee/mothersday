@@ -394,11 +394,6 @@
         <section class="hero">
             <p class="eyebrow">A little birthday surprise</p>
             <h1>Happy Birthday, Chelsea</h1>
-            <p class="lead">
-                Start by answering the question below. If the &ldquo;No&rdquo; button is pressed again and again,
-                the &ldquo;Yes&rdquo; button grows bigger, and after the third &ldquo;No&rdquo; the button starts running away.
-                When she finally says yes, the birthday celebration, sunflower reveal, and music appear.
-            </p>
         </section>
 
         <section class="question-card" id="decisionCard">
@@ -408,7 +403,7 @@
                     <button class="yes-btn" id="yesBtn" type="button">Yes</button>
                     <button class="no-btn" id="noBtn" type="button">No</button>
                 </div>
-                <p class="intro-note" id="hintText">Try pressing No a few times and watch what happens.</p>
+                <p class="intro-note" id="hintText">Choose honestly...</p>
             </div>
         </section>
 
@@ -540,14 +535,6 @@
             });
         }
 
-        function showCelebration() {
-            celebration.classList.add('show');
-            document.getElementById('questionText').textContent = 'She said yes!';
-            document.getElementById('hintText').textContent = 'Scroll down to enjoy the message, carousel, and letter.';
-            decisionCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            createSparkles();
-        }
-
         noBtn.addEventListener('click', () => {
             noCount += 1;
             growYes();
@@ -562,8 +549,7 @@
         });
 
         yesBtn.addEventListener('click', () => {
-            showCelebration();
-            playBirthdaySong();
+            window.location.href = 'birthday.html';
         });
 
         musicBtn.addEventListener('click', () => {
